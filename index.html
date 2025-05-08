@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Visit Malaysia 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- jQuery Mobile -->
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+  <!-- Custom CSS -->
+  <style>
+    /* === Global Styles === */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #F9F9F9;   /* Coconut White */
+      color: #333333;              /* Batu Caves Gray */
+    }
+  
+    h1 {
+      background: linear-gradient(135deg, #0074B7, #388E3C); /* Tropical Blue to Rainforest Green */
+      color: #F9F9F9;
+    }
+  
+    h2, h3 {
+      color: #0074B7; /* Tropical Blue */
+    }
+  
+    .ui-content {
+      padding: 20px;
+    }
+  
+    /* === Header & Navbar === */
+    div[data-role="page"] > div[data-role="header"] {
+      background: #0074B7 !important;
+    }
+  
+    div[data-role="page"] > div[data-role="header"] h1 {
+      color: #fff !important;
+      font-size: 2.7rem;
+      font-weight: bold;
+      margin: 0;
+      padding: 30px 0 18px 0;
+      background: none !important;
+      text-shadow: none;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+  
+    div[data-role="navbar"] {
+      background: #0074B7 !important;
+      border: none;
+    }
+  
+    div[data-role="navbar"] ul {
+      display: flex !important;
+      justify-content: center;
+      padding: 0;
+      background: #0074B7;
+    }
+  
+    div[data-role="navbar"] ul li {
+      flex: 1 1 auto;
+      text-align: center;
+    }
+  
+    div[data-role="navbar"] ul li a {
+      background: #0074B7 !important;
+      color: #F9F9F9 !important;
+      border-radius: 0;
+      border: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 12px 0 !important;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+  
+    div[data-role="navbar"] ul li a.ui-btn-active,
+    div[data-role="navbar"] ul li a.active,
+    div[data-role="navbar"] ul li a:active {
+      background: #D72638 !important; /* Hibiscus Red */
+      color: #fff !important;
+    }
+  
+    /* === Destination Page === */
+    .collapsible-header-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      vertical-align: middle;
+      margin-right: 8px;
+      border-radius: 5px;
+    }
+
+    /* Example for theme 'g' */
+    .ui-bar-g, .ui-body-g, .ui-btn-up-g, .ui-btn-hover-g, .ui-btn-down-g, .collapsible {
+        background-color: #228B22 !important;
+        border-color: #228B22 !important;
+        color: #fff !important;
+    }
+
+    .ui-collapsible-heading .ui-btn-icon-left:after {
+        background-color: #228B22 !important;
+        color: #F9F9F9 !important;
+    }
+  
+    /* === Events Page === */
+    .event-card {
+      background: #F9F9F9;
+      border-left: 5px solid #FFC107; /* Golden Yellow */
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+  
+    .event-card:hover {
+      transform: translateY(-4px);
+    }
+  
+    .event-card h3 {
+      color: #0074B7;
+      font-size: 20px;
+      margin-top: 0;
+    }
+  
+    .event-card p {
+      font-size: 16px;
+      color: #333333;
+    }
+  
+    /* === Travel Guide (can be expanded if needed) === */
+  
+    /* === Gallery === */
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+    }
+  
+    .gallery-container img {
+      width: 300%;
+      max-width: 480px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .gallery-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+  
+    /* === Contact Page === */
+    #contact .ui-content {
+      background: #F9F9F9;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+  
+    #contact h1 {
+      text-align: center;
+      color: #0074B7;
+      margin-bottom: 30px;
+    }
+  
+    #contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+  
+    #contact input[type="text"],
+    #contact input[type="email"],
+    #contact textarea {
+      border: 1px solid #0074B7;
+      background: #ffffff;
+      padding: 12px 15px;
+      width: 100%;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #333333;
+    }
+  
+    #contact label {
+      font-weight: 600;
+      color: #388E3C;
+      display: block;
+      margin: 10px 0 6px;
+    }
+  
+    #contact input:focus,
+    #contact textarea:focus {
+      border-color: #388E3C;
+      outline: none;
+    }
+  
+    #contact button {
+      background-color: #D72638;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+  
+    #contact button:hover {
+      background-color: #B71C1C;
+    }
+  
+    /* === Footer === */
+    .ui-footer {
+      background-color: #0074B7 !important;
+      color: #F9F9F9 !important;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 1rem;
+      border-top: 1px solid #ddd;
+    }
+  
+    /* === Responsive Fixes === */
+    @media (max-width: 600px) {
+      div[data-role="header"] h1 {
+        font-size: 1.8rem;
+        padding: 18px 0 10px 0;
+      }
+  
+      div[data-role="navbar"] ul li a {
+        font-size: 1rem;
+        padding: 10px 0 !important;
+      }
+  
+      #contact form {
+        padding: 20px 15px;
+      }
+  
+      #contact h1 {
+        font-size: 26px;
+      }
+  
+      .gallery-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>  
+</head>
+<body>
+
+<!-- Home -->
+<div data-role="page" id="home" data-theme="a" style="background: url('image/malaysia.jpeg') no-repeat center center / cover;">
+  <div data-role="header">
+    <h1>Visit Malaysia 2026</h1>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slide" class="ui-btn-active ui-state-persist">Home</a></li>
+        <li><a href="#destinations" data-transition="fade">Destinations</a></li>
+        <li><a href="#events" data-transition="flip">Events</a></li>
+        <li><a href="#guide" data-transition="pop">Travel Guide</a></li>
+        <li><a href="#gallery" data-transition="pop">Gallery</a></li>
+        <li><a href="#contact" data-transition="slide">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div role="main" class="ui-content" style="text-align: center; padding: 30px;">
+    <div style="background-color: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); max-width: 600px; margin: auto;">
+      <h2 style="color: #007acc;">Welcome to Malaysia!</h2>
+      <p style="font-size: 18px; color: #333;">Discover the heart of Southeast Asia with its vibrant cities, rich culture, stunning islands, and warm hospitality.</p>
+  
+      <!-- Button grid -->
+      <div class="ui-grid-b" style="margin-top: 20px;">
+        <div class="ui-block-a">
+          <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top" data-transition="slide">About Us</a>
+        </div>
+        <div class="ui-block-b">
+          <a href="#destinations" class="ui-btn ui-icon-location ui-btn-icon-top" data-transition="fade">Destination</a>
+        </div>
+        <div class="ui-block-c">
+          <a href="#events" class="ui-btn ui-icon-star ui-btn-icon-top" data-transition="flip">Travel Guides</a>
+        </div>
+        <div class="ui-block-a">
+          <a href="#guide" class="ui-btn ui-icon-info ui-btn-icon-top" data-transition="pop">2026 Events</a>
+        </div>
+        <div class="ui-block-b">
+          <a href="#gallery" class="ui-btn ui-icon-grid ui-btn-icon-top" data-transition="slide">Travel Gallery</a>
+        </div>
+        <div class="ui-block-c">
+          <a href="#contact" class="ui-btn ui-icon-phone ui-btn-icon-top" data-transition="slide">Contact Info</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <div data-role="footer" data-position="fixed" style="background-color: rgba(255, 255, 255, 0.925); color: dimgrey;">
+    <h4>© 2026 Visit Malaysia</h4>
+  </div>
+</div>
+
+<!-- Destinations -->
+<div data-role="page" id="destinations" data-theme="a">
+    <div data-role="header">
+      <h1>Destinations</h1>
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-transition="slide">Home</a></li>
+          <li><a href="#destinations" data-transition="fade" class="ui-btn-active ui-state-persist">Destinations</a></li>
+          <li><a href="#events" data-transition="flip">Events</a></li>
+          <li><a href="#guide" data-transition="pop">Travel Guide</a></li>
+          <li><a href="#gallery" data-transition="pop">Gallery</a></li>
+          <li><a href="#contact" data-transition="slide">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div role="main" class="ui-content">
+      <div data-role="collapsibleset" data-theme="g" data-content-theme="g">
+        <div data-role="collapsible" data-collapsed="true">
+            <h3>
+                <img src="image/KualaLumpur.jpg" alt="Kuala Lumpur" class="collapsible-header-img"> 
+                Kuala Lumpur
+            </h3>
+            <p><strong>Vibrant capital city with iconic towers.</strong></p>
+            <ul>
+                <li>Petronas Twin Towers</li>
+                <li>Batu Caves</li>
+                <li>Shopping and nightlife hotspots</li>
+                </ul>
+                <a href="https://goo.gl/maps/9xQz3" target="_blank" data-role="button" data-icon="map" data-mini="true">View Map</a>
+        </div>
+    
+        <div data-role="collapsible" data-collapsed="true">
+        <h3>
+            <img src="image/Langkawi.webp" alt="Langkawi" class="collapsible-header-img">
+            Langkawi
+        </h3>
+        <p><strong>Island paradise with beaches and nature.</strong></p>
+            <ul>
+                <li>Beautiful beaches like Pantai Cenang</li>
+                <li>Langkawi Sky Bridge</li>
+                <li>Best visited from November to March</li>
+            </ul>
+            <a href="https://goo.gl/maps/1hC3xk2z1gR2" target="_blank" data-role="button" data-icon="map" data-mini="true">View Map</a>
+        </div>
+
+        <div data-role="collapsible" data-collapsed="true">
+            <h3>
+                <img src="image/Penang.webp" alt="Penang" class="collapsible-header-img">
+                Penang
+            </h3>
+            <p><strong>Cultural heritage and delicious cuisine.</strong></p>
+                <ul>
+                  <li>George Town UNESCO Heritage Site</li>
+                  <li>Street art and hawker food</li>
+                  <li>Penang Hill and beaches</li>
+                </ul>
+            <a href="https://goo.gl/maps/3rQxN" target="_blank" data-role="button" data-icon="map" data-mini="true">View Map</a>
+        </div>
+
+        <div data-role="collapsible" data-collapsed="true">
+            <h3>
+                <img src="image/Sabah.jpg" alt="Sabah" class="collapsible-header-img">
+                Sabah
+            </h3>
+            <p><strong>Adventure gateway to Borneo’s wonders.</strong></p>
+                <ul>
+                <li>Climb Mount Kinabalu, Southeast Asia’s highest peak</li>
+                  <li>Explore the wildlife of Kinabatangan River</li>
+                  <li>Relax on the beaches of Sipadan and Manukan Islands</li>
+                </ul>
+            <a href="https://goo.gl/maps/6K6NQz7Rk4v3f7fF8" target="_blank" data-role="button" data-icon="map" data-mini="true">View Map</a>
+        </div>
+      </div>
+    </div>
+
+  <div data-role="footer" data-position="fixed" style="background-color: rgba(255, 255, 255, 0.925); color: dimgrey;">
+    <h4>© 2026 Visit Malaysia</h4>
+  </div>
+</div>
+
+<!-- Events 2026 -->
+<div data-role="page" id="events" data-theme="a">
+    <div data-role="header">
+      <h1>Events 2026</h1>
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-transition="slide">Home</a></li>
+          <li><a href="#destinations" data-transition="fade">Destinations</a></li>
+          <li><a href="#events" data-transition="flip" class="ui-btn-active ui-state-persist">Events</a></li>
+          <li><a href="#guide" data-transition="pop">Travel Guide</a></li>
+          <li><a href="#gallery" data-transition="pop">Gallery</a></li>
+          <li><a href="#contact" data-transition="slide">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div role="main" class="ui-content">
+    <h2>Upcoming Events in 2026</h2>
+        <div class="event-card">
+          <h3>Visit Malaysia Parade 2026</h3>
+          <p>A vibrant national parade celebrating Malaysian unity, culture, and heritage with floats and performances.</p>
+        </div>
+        <div class="event-card">
+          <h3>Malaysia Cultural Week</h3>
+          <p>Experience a week-long celebration of traditional dance, music, cuisine, and crafts from all states in Malaysia.</p>
+        </div>
+        <div class="event-card">
+          <h3>Sabah International Dive Fest</h3>
+          <p>Join divers from around the world to explore Sabah’s world-renowned coral reefs and marine biodiversity.</p>
+        </div>
+        <div class="event-card">
+          <h3>Penang Street Food Carnival</h3>
+          <p>A food lover’s dream! Discover Penang's best hawker food, cooking demos, and live street performances.</p>
+        </div>
+  </div>
+
+  <div data-role="footer" data-position="fixed" style="background-color: rgba(255, 255, 255, 0.925); color: dimgrey;">
+    <h4>© 2026 Visit Malaysia</h4>
+  </div>
+
+</div>
+  
+  <!-- Travel Guide -->
+  <div data-role="page" id="guide" data-theme="a">
+    <div data-role="header">
+      <h1>Travel Guide</h1>
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-transition="slide">Home</a></li>
+          <li><a href="#destinations" data-transition="fade">Destinations</a></li>
+          <li><a href="#events" data-transition="flip">Events</a></li>
+          <li><a href="#guide" data-transition="pop" class="ui-btn-active ui-state-persist">Travel Guide</a></li>
+          <li><a href="#gallery" data-transition="pop">Gallery</a></li>
+          <li><a href="#contact" data-transition="slide">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div role="main" class="ui-content">
+        <h2>Plan Your Perfect Trip</h2>
+    
+        <div class="event-card">
+          <h3>Best Time to Visit</h3>
+          <p>The best time to visit Malaysia is between March and October, when the weather is dry and ideal for sightseeing and island adventures.</p>
+        </div>
+    
+        <div class="event-card">
+          <h3>Transportation Tips</h3>
+          <p>Public transport is reliable in big cities. Use Grab for ride-hailing, and take domestic flights or buses to travel between states affordably.</p>
+        </div>
+    
+        <div class="event-card">
+          <h3>Cultural Etiquette</h3>
+          <p>Respect local customs, dress modestly in rural or religious areas, and always remove your shoes before entering someone’s home or a mosque.</p>
+        </div>
+    
+        <div class="event-card">
+          <h3>Must-Try Foods</h3>
+          <p>Don't miss Nasi Lemak, Char Kway Teow, Roti Canai, and Laksa. Try hawker stalls for authentic and affordable local flavors.</p>
+        </div>
+    </div>
+
+    <div data-role="footer" data-position="fixed" style="background-color: rgba(255, 255, 255, 0.925); color: dimgrey;">
+        <h4>© 2026 Visit Malaysia</h4>
+      </div>
+
+  </div>
+  
+  <!-- Gallery -->
+  <div data-role="page" id="gallery" data-theme="a">
+    <div data-role="header">
+      <h1>Gallery</h1>
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-transition="slide">Home</a></li>
+          <li><a href="#destinations" data-transition="fade">Destinations</a></li>
+          <li><a href="#events" data-transition="flip">Events</a></li>
+          <li><a href="#guide" data-transition="pop">Travel Guide</a></li>
+          <li><a href="#gallery" data-transition="pop" class="ui-btn-active ui-state-persist">Gallery</a></li>
+          <li><a href="#contact" data-transition="slide">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div role="main" class="ui-content">
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="image/KualaLumpur.jpg" alt="KUALA LUMPUR">
+                <p class="caption">KUALA LUMPUR</p>
+                <img src="image/Langkawi.webp" alt="LANGKAWI">
+                <p class="caption">LANGKAWI</p>
+                <img src="image/Penang.webp" alt="PENANG">
+                <p class="caption">PENANG</p>
+                <img src="image/Sabah.jpg" alt="SABAH">
+                <p class="caption">SABAH</p>
+            </div>
+      </div>
+    </div> 
+    
+    <div data-role="footer" data-position="fixed" style="background-color: rgba(255, 255, 255, 0.925); color: dimgrey;">
+        <h4>© 2026 Visit Malaysia</h4>
+      </div>
+
+  </div>
+
+<!-- Contact Page -->
+<div data-role="page" id="contact">
+  <div data-role="header">
+    <h1>Contact Us</h1>
+    <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-transition="slide">Home</a></li>
+          <li><a href="#destinations" data-transition="fade">Destinations</a></li>
+          <li><a href="#events" data-transition="flip">Events</a></li>
+          <li><a href="#guide" data-transition="pop">Travel Guide</a></li>
+          <li><a href="#gallery" data-transition="pop">Gallery</a></li>
+          <li><a href="#contact" data-transition="slide" class="ui-btn-active ui-state-persist">Contact</a></li>
+        </ul>
+      </div>
+  </div>
+  <div role="main" class="ui-content">
+    <form id="contactForm">
+      <div data-role="fieldcontain">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Your name" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Your email" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="message">Message:</label>
+        <textarea name="message" id="message" placeholder="Your message" required></textarea>
+      </div>
+      <input type="submit" value="Send" data-theme="b">
+    </form>
+    <div id="formResult" style="margin-top:10px;"></div>
+  </div>
+
+  <div data-role="footer" data-position="fixed" style="background-color: rgba(255, 255, 255, 0.925); color: dimgrey;">
+    <h4>© 2026 Visit Malaysia</h4>
+  </div>
+</div>
+
+<script>
+    // Simple form submission handler
+    $(document).on("submit", "#contactForm", function(e) {
+      e.preventDefault();
+      var name = $("#name").val().trim();
+      var email = $("#email").val().trim();
+      var message = $("#message").val().trim();
+  
+      if(name && email && message) {
+        $("#formResult").html("<p>Thank you, " + name + "! Your message has been sent.</p>").css("color", "green");
+        $(this)[0].reset();
+      } else {
+        $("#formResult").html("<p>Please fill in all fields.</p>").css("color", "red");
+      }
+    });
+  </script>  
+</body>
+</html>
